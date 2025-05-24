@@ -1,0 +1,106 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import ExportCSVButton from '@/components/ExportCSVButton';
+import Pagination from '@/components/Pagination';
+
+interface CompletedTask {
+  id: string;
+  type: string;
+  scheduledDate: string;
+  status: string;
+  techName: string;
+  priorityLevel: string;
+}
+
+export default function CompletedTasksPage() {
+  const [tasks, setTasks] = useState<CompletedTask[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const fetchCompletedTasks = async () => {
+      try {
+        const tasksRef = collection(db, 'maintenance-tasks');
+        const q = query(tasksRef, where('status', '==', 'completed'));
+        const querySnapshot = await getDocs(q);
+        
+        const completedTasks = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          type: doc.data().type,
+          scheduledDate: doc.data().scheduledDate,
+          status: doc.data().status,
+          techName: doc.data().techName,
+          priorityLevel: doc.data().priorityLevel
+        }));
+
+        setTasks(completedTasks);
+      } catch (error) {
+        console.error('Error fetching completed tasks:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompletedTasks();
+  }, []);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(tasks.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTasks = tasks.slice(startIndex, endIndex);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Completed Tasks</h1>
+        <ExportCSVButton data={tasks} filename="completed-tasks" />
+      </div>
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-primary-dark">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Task ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Task Type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Scheduled Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Technician</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Priority</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-secondary-dark">
+              {currentTasks.map((task) => (
+                <tr key={task.id} className="hover:bg-secondary-light transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap">{task.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{task.type}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{task.scheduledDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{task.techName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{task.priorityLevel}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{task.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </div>
+  );
+} 

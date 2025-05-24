@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --primary-dark: #933532;
+  --primary: #e2c178;
+  --primary-light: #fbe7b9;
+  --primary-text: #000001;
+
+  /* Secondary Colors */
+  --secondary: #f5f5f5;
+  --secondary-dark: #e0e0e0;
+  --secondary-light: #ffffff;
+
+  /* Accent Colors */
+  --accent: #933532;
+  --accent-light: #b34a47;
+  --accent-dark: #7a2b28;
+
+  /* Background Colors */
+  --background: var(--secondary-light);
+  --background-alt: var(--secondary);
+  --background-dark: var(--secondary-dark);
+
+  /* Text Colors */
+  --text-primary: var(--primary-text);
+  --text-secondary: #4a4a4a;
+  --text-light: #666666;
+
+  /* Status Colors */
+  --success: #4caf50;
+  --warning: #ff9800;
+  --error: #f44336;
+  --info: #2196f3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Utility Classes */
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-primary-light {
+  background-color: var(--primary-light);
+}
+
+.bg-primary-dark {
+  background-color: var(--primary-dark);
+}
+
+.text-primary {
+  color: var(--primary-text);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  color: var(--secondary-light);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--secondary-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: var(--secondary-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-dark);
+}
