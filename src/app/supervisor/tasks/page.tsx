@@ -43,8 +43,8 @@ export default function MaintenanceTasksPage() {
     techId: '',
     techName: '',
     scheduledDate: '',
-    priorityLevel: 'Medium' as const,
-    status: 'pending' as const
+    priorityLevel: 'Medium' as 'Low' | 'Medium' | 'High',
+    status: 'pending' as 'pending' | 'completed'
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

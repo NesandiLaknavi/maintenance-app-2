@@ -76,9 +76,14 @@ export default function ReorderLowStockPage() {
       const items = querySnapshot.docs
         .map(doc => ({
           id: doc.id,
-          ...doc.data()
+          materialName: doc.data().materialName || '',
+          availableQty: doc.data().availableQty || 0,
+          reorderLevel: doc.data().reorderLevel || 0,
+          lastUpdated: doc.data().lastUpdated || Timestamp.now(),
+          lastRefillDate: doc.data().lastRefillDate,
+          unit: doc.data().unit || ''
         }))
-        .filter(item => item.availableQty <= item.reorderLevel) as LowStockItem[];
+        .filter(item => item.availableQty <= item.reorderLevel);
       setLowStockItems(items);
       setFilteredItems(items);
     } catch (error) {

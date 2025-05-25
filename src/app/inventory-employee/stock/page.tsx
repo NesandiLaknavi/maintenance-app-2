@@ -55,7 +55,7 @@ export default function StockPage() {
     unit: '',
     availableQty: 0,
     reorderLevel: 10,
-    status: 'In Stock' as const,
+    status: 'In Stock' as 'In Stock' | 'Low Stock' | 'Out of Stock',
     lowStock: false
   });
 

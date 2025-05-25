@@ -82,7 +82,10 @@ export default function DashboardPage() {
         const transactions = transactionsSnapshot.docs
           .map(doc => ({
             id: doc.id,
-            ...doc.data(),
+            materialName: doc.data().materialName || '',
+            type: doc.data().type || '',
+            quantity: doc.data().quantity || 0,
+            unit: doc.data().unit || '',
             date: doc.data().date?.toDate?.() || new Date()
           }))
           .sort((a, b) => b.date.getTime() - a.date.getTime())
