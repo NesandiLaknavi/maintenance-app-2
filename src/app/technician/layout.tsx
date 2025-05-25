@@ -15,8 +15,7 @@ const navItems = [
   { label: 'Service Log', href: '/technician/service-log', icon: <FiBookOpen /> },
   { label: 'Request Materials', href: '/technician/request-materials', icon: <FiPackage /> },
   { label: 'Meter Reading', href: '/technician/meter-reading', icon: <FiActivity /> },
-  { label: 'Profile', href: '/technician/profile', icon: <FiUser /> },
-  { label: 'Settings', href: '/technician/settings', icon: <FiSettings /> },
+  
 ];
 
 export default function TechnicianLayout({

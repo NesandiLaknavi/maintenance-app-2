@@ -78,8 +78,8 @@ export default function SideNav({ navItems, onLogout }: SideNavProps) {
           <Image
             src="/logo/logo.jpeg"
             alt="Company Logo"
-            width={40}
-            height={40}
+            width={75}
+            height={75}
             className="rounded-lg"
             priority
           />
@@ -88,12 +88,12 @@ export default function SideNav({ navItems, onLogout }: SideNavProps) {
             <Image
               src="/logo/logo.jpeg"
               alt="Company Logo"
-              width={40}
-              height={40}
+              width={65}
+              height={65}
               className="rounded-lg"
               priority
             />
-            <h1 className="font-bold text-xl text-primary-dark">Maintenance App</h1>
+            
           </div>
         )}
       </div>
