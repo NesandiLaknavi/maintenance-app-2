@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
+    user: process.env.NEXT_PUBLIC_EMAIL_USER,
+    pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD
   },
   tls: {
     rejectUnauthorized: false
@@ -23,8 +23,8 @@ transporter.verify(function (error, success) {
   if (error) {
     console.error('SMTP configuration error:', error);
     console.error('Email configuration:', {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD ? '***' : 'not set'
+      user: process.env.NEXT_PUBLIC_EMAIL_USER,
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD ? '***' : 'not set'
     });
   } else {
     console.log('SMTP server is ready to take our messages');
@@ -35,12 +35,12 @@ export async function POST(request: Request) {
   try {
     const { to, subject, html } = await request.json();
 
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
+    if (!process.env.NEXT_PUBLIC_EMAIL_USER || !process.env.NEXT_PUBLIC_EMAIL_PASSWORD) {
       throw new Error('Email configuration is missing. Please check your environment variables.');
     }
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.NEXT_PUBLIC_EMAIL_USER,
       to,
       subject,
       html
