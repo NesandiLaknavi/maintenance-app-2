@@ -8,7 +8,7 @@ import { FiHome, FiCheckCircle, FiAlertCircle, FiBox, FiClipboard, FiShoppingCar
 import LoadingScreen from '@/components/LoadingScreen';
 
 const navItems = [
-  { key: 'dashboard', label: 'Dashboard', href: '/inventory-employee', icon: <FiHome /> },
+  { key: 'dashboard', label: 'Dashboard', href: '/inventory-employee/dashboard', icon: <FiHome /> },
   { key: 'completed-tasks', label: 'Completed Tasks', href: '/inventory-employee/completed-tasks', icon: <FiCheckCircle /> },
   { key: 'overdue-tasks', label: 'Overdue Tasks', href: '/inventory-employee/overdue-tasks', icon: <FiAlertCircle /> },
   { key: 'material-usage', label: 'Material Usage', href: '/inventory-employee/material-usage', icon: <FiClipboard /> },

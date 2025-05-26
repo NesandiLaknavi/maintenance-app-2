@@ -42,7 +42,7 @@ export default function DashboardPage() {
         );
         const overdueSnapshot = await getDocs(overdueQuery);
         const currentDate = new Date();
-        const overdueTasks = overdueSnapshot.docs.filter(doc => 
+        const overdueTasks = overdueSnapshot.docs.filter(doc =>
           new Date(doc.data().scheduledDate) < currentDate
         ).length;
 
@@ -119,7 +119,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold mb-4">Inventory Employee Dashboard</h1>
-      
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow p-6">
@@ -191,11 +191,10 @@ export default function DashboardPage() {
                 <tr key={transaction.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.materialName}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      transaction.type === 'IN' 
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${transaction.type === 'IN'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-red-100 text-red-800'
+                      }`}>
                       {transaction.type}
                     </span>
                   </td>
